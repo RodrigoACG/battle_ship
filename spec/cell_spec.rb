@@ -45,23 +45,17 @@ RSpec.describe Cell do
       expect(@cell.render).to eq(".")
       @cell.fire_upon
       expect(@cell.render).to eq("M")
-      
-      
-    
     end
   end
   
   it 'renders its shot'do 
   # need ship object to be verified when being fired upon 
+    @cell.place_ship(@cruiser)
+    @cell.fire_upon
+    expect(@cell.render(true)).to eq("H")
     @cell.fire_upon
     @cell.fire_upon
-    @cell.fire_upon
-
     expect(@cell.render(true)).to eq("X")
-
-
-
- 
   end
 
 end
