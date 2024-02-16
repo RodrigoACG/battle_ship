@@ -26,13 +26,13 @@ class Cell
 
     def render(ship = nil)
         if ship == true 
-            if @fired_upon == false
+            if  @fired_upon == false
                 "S"
-            elsif @fired_upon == true
+            elsif @fired_upon == true  
                 "H"
             else @fired_upon == true && @ship.health == 0
                 "X"
-            end
+            end      
         end
         
         if 
@@ -43,6 +43,5 @@ class Cell
         end
         
     end
-    
-    
+
 end
