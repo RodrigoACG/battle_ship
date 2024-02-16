@@ -2,7 +2,8 @@ require 'spec_helper'
 
 RSpec.describe Cell do 
   before(:each)do 
-  @cell = Cell.new("B4")
+    @cell = Cell.new("B4")
+    @cruiser = Ship.new("Cruiser", 3)
   end
 
   it 'exists'do 
@@ -16,6 +17,15 @@ RSpec.describe Cell do
 
     it 'ship' do 
       expect(@cell.ship).to eq(nil)
+      expect(@cell.empty?).to eq(true)
+    end
+  end
+
+  describe '#place ship' do 
+    it 'places a ship' do 
+      @cell.place_ship(@cruiser)
+      expect(@cell.ship).to eq(@cruiser)
+      expect(@cell.empty?).to eq(false)
     end
   end
 
