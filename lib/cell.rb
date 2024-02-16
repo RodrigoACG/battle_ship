@@ -10,5 +10,7 @@ class Cell
         @ship == nil
     end
 
-    def 
+    def place_ship(ship_object)
+
+    end
 end
