@@ -3,6 +3,7 @@ require 'spec_helper'
 RSpec.describe Cell do 
   before(:each)do 
     @cell = Cell.new("B4")
+    @cell_2 = Cell.new("C3")
     @cruiser = Ship.new("Cruiser", 3)
   end
 
@@ -39,4 +40,29 @@ RSpec.describe Cell do
     end
   end
 
+  describe '#render shots' do 
+    it 'renders shots' do 
+      expect(@cell.render).to eq(".")
+      @cell.fire_upon
+      expect(@cell.render).to eq("M")
+      
+      
+    
+    end
+  end
+  
+  it 'renders its shot'do 
+  # need ship object to be verified when being fired upon 
+    @cell.fire_upon
+    @cell.fire_upon
+    @cell.fire_upon
+
+    expect(@cell.render(true)).to eq("X")
+
+
+
+ 
+  end
+
 end
+
