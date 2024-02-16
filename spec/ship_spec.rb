@@ -10,9 +10,11 @@ RSpec.describe Ship do
   end
 
   describe'#cruiser' do 
-    it 'describes a cruiser' do 
+    it 'describes a cruiser at default' do 
       expect(@cruiser.name).to eq("Cruiser")
-      expect
+      expect(@cruiser.length).to eq(3)
+      expect(@cruiser.health).to eq(3)
+      expect(@cruiser.sunk?).to eq(false)
     end
   end
 end
