@@ -54,6 +54,7 @@ RSpec.describe Cell do
   it 'renders its shot'do 
   # need ship object to be verified when being fired upon 
     @cell.fire_upon
+    expect(@cell.render(true)).to eq("H")
     @cell.fire_upon
     @cell.fire_upon
 
@@ -62,7 +63,7 @@ RSpec.describe Cell do
 
 
  
-  end
-
 end
+
+
 
