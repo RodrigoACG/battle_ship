@@ -5,7 +5,12 @@ RSpec.describe Cell do
   @cell = Cell.new("B4")
   end
 
-  it 'should be an instance of a cell' do 
+  it 'exists'do 
+   expect(@cell).to be_a(Cell)
+  end
+
+  it 'attributes of a cell' do 
     expect(@cell.coordinate).to eq("B4")
+
   end
 end
