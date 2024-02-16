@@ -29,4 +29,13 @@ RSpec.describe Cell do
     end
   end
 
+  describe '#fire upon' do 
+    it 'fires upon ship' do 
+      @cell.place_ship(@cruiser)
+      expect(@cell.fired_upon?).to eq(false)
+      @cell.fire_upon
+      expect(@cell.ship.health).to eq(2)
+    end
+  end
+
 end
