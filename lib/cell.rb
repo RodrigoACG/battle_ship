@@ -37,10 +37,12 @@ class Cell
             end      
         end
         
-        if @fired_upon == true && @ship== nil
+        if 
+            @fired_upon == true && @ship == nil
             "M"
         else
             "."   
         end
+        
     end
 end

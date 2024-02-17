@@ -54,6 +54,7 @@ RSpec.describe Cell do
     @cell.fire_upon
     expect(@cell.render(true)).to eq("H")
     @cell.fire_upon
+    expect(@cell.render(true)).to eq("H")
     @cell.fire_upon
     expect(@cell.render(true)).to eq("X")
   end
@@ -72,4 +73,6 @@ RSpec.describe Cell do
     expect(@cell_2.render(true)).to eq("X")
   end
 end
+
+
 
