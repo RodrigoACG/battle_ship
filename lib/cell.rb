@@ -24,22 +24,22 @@ class Cell
         @ship.hit unless @ship == nil
     end
 
-    def render(ship = nil) 
+    def render(ship_cond = nil) 
         
-        if ship == true 
+        if ship_cond == true 
             
             if  @fired_upon == false
                 return "S"
-            elsif @fired_upon == true && @ship.health == 0
+            elsif @fired_upon == true && @ship.health == 0 && @ship.sunk? == true
                 return "X"
-            elsif @fired_upon == true  
+            elsif @fired_upon == true 
                 return "H"
             end      
         end
         
         if @fired_upon == true && @ship== nil
             "M"
-        else 
+        else
             "."   
         end
     end
