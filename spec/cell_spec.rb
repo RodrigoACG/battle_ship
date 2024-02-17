@@ -45,11 +45,11 @@ RSpec.describe Cell do
       expect(@cell.render).to eq(".")
       @cell.fire_upon
       expect(@cell.render).to eq("M")
-    end
+    end 
   end
   
   it 'renders its shot'do 
-  # need ship object to be verified when being fired upon 
+    # need ship object to be verified when being fired upon 
     @cell.place_ship(@cruiser)
     @cell.fire_upon
     expect(@cell.render(true)).to eq("H")
@@ -57,6 +57,20 @@ RSpec.describe Cell do
     expect(@cell.render(true)).to eq("H")
     @cell.fire_upon
     expect(@cell.render(true)).to eq("X")
+  end
+  
+
+  it "cell 2 getting sunk" do 
+    @cell_2.place_ship(@cruiser)
+    expect(@cell_2.render).to eq(".")
+    expect(@cell_2.render(true)).to eq("S")
+    @cell_2.fire_upon
+    expect(@cell_2.render(true)).to eq("H")
+    expect(@cruiser.sunk?).to eq(false)
+    @cruiser.hit
+    @cruiser.hit
+    expect(@cruiser.sunk?).to eq(true)
+    expect(@cell_2.render(true)).to eq("X")
   end
 end
 
