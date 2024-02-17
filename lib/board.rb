@@ -22,4 +22,16 @@ class Board
         #split the string in cell_name_check in to rows and columns
         #check to make sure rows are valid as well as columns
     end
+
+    def valid_placement?(ship_object, cell_array)
+         cell_array.count == ship_object.length
+
+        
+            
+        
+
+        
+        
+
+    end
 end
