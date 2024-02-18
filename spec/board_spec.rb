@@ -28,20 +28,23 @@ RSpec.describe Board do
       expect(@board_1.valid_coordinate?("A5")).to be false
     end
 
-    it 'validates placements'do 
+    it 'validates placements horizontally'do 
       expect(@board_1.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
       expect(@board_1.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
       expect(@board_1.valid_placement?(@submarine, ["A2", "A3", "A4"])).to eq(false)
     end
 
+    it 'validates placements vertically'do 
+      expect(@board_1.valid_placement?(@cruiser, ["B1", "B2"])).to eq(false)
+      expect(@board_1.valid_placement?(@cruiser, ["C1", "C2", "C3"])).to eq(true)
+      expect(@board_1.valid_placement?(@submarine, ["D2", "D3", "D4"])).to eq(false)
+    end
+
     it 'validates consecutive placements' do 
       expect(@board_1.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to eq(false)
-      # expect(@board_1.valid_placement?(@submarine, ["A1", "C1"])).to eq(false)
-      # expect(@board_1.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq(false)
-      # expect(@board_1.valid_placement?(@submarine, ["C1", "B1"])).to eq(false)
+      expect(@board_1.valid_placement?(@submarine, ["A1", "C1"])).to eq(false)
+      expect(@board_1.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq(false)
+      expect(@board_1.valid_placement?(@submarine, ["C1", "B1"])).to eq(false)
     end
   end
-
-
-
 end
