@@ -46,8 +46,8 @@ class Board
 
     ship_object.length.times do |num|
       return false if @cells["#{('A'..'D').to_a[row_index]}#{col_index + num}"]
+      true
     end
-    true
   end
 
   def vertical_placement_valid?(ship_object, start_row, start_col)
@@ -55,8 +55,8 @@ class Board
 
     ship_object.length.times do |num|
       return false if @cells["#{('A'..'D').to_a[row_index + num]}#{start_col}"]
-    end
-    true
+      true
+    end  
   end
 
   def consecutive_cells?(coords)
