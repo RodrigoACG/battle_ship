@@ -11,7 +11,6 @@ class Board
             @cells[cell_name] = Cell.new(cell_name)
         end
     end   
-    
   end
 
   def valid_coordinate?(cell_name_check)
@@ -24,40 +23,56 @@ class Board
   end
 
   def valid_placement?(ship_object, cell_array) 
+    row_array = []
+    col_array = []
     return false unless cell_array.all? { |name| valid_coordinate?(name) }
-    row_coords = cell_array.map { |name| name[0] }
-    col_coords = cell_array.map { |name| name[1..-1].to_i }
+    row_array << cell_array.map { |name| name[0] }
+    col_array << cell_array.map { |name| name[1..-1].to_i }
+    col_coords = col_array.flatten.compact
+    row_coords = row_array.flatten.compact
+    
+    #check if inputs are sufficient 
     
     if row_coords.uniq.length != 1 && col_coords.uniq.length != 1 # Check if the ship placement is neither horizontal nor vertical
       return false
     elsif row_coords.uniq.length == 1 # Horizontal placement
-      return true if consecutive_cells?(col_coords) && horizontal_placement_valid?(ship_object, row_coords[0], col_coords.min)
+      (consecutive_cells?(col_coords) && horizontal_placement_valid?(ship_object, row_coords[0], col_coords.min)) && col_coords.count == ship_object.length
     elsif col_coords.uniq.length == 1 # Vertical placement
-      return true if consecutive_cells?(row_coords) && vertical_placement_valid?(ship_object, row_coords.min, col_coords[0])
+      (consecutive_cells?(row_coords) && vertical_placement_valid?(ship_object, row_coords.min, col_coords[0])) && row_coords.count == ship_object.length
+    else
+      false
     end
   end
 
   def horizontal_placement_valid?(ship_object, start_row, start_col)
-    
     row_index = ('A'..'D').to_a.index(start_row)
     row_check = []
+    
     ship_object.length.times do |num|
-      row_check << @cells["#{('A'..'D').to_a[row_index]}#{start_col + num}"]  
+      if row_index != nil
+        row_check << @cells["#{('A'..'D').to_a[row_index]}#{start_col + num}"]  
+      else
+        false
+      end
     end
+    
      row_check.compact.count == ship_object.length
   end
 
-  # def vertical_placement_valid?(ship_object, start_row, start_col)
-  #   row_index = ('A'..'D').to_a.index(start_row)
-
-  #   ship_object.length.times do |num|
-  #     return false if @cells["#{('A'..'D').to_a[row_index + num]}#{start_col}"]
-  #     true
-  #   end  
-  # end
+  def vertical_placement_valid?(ship_object, start_row, start_col)
+    row_index = ('A'..'D').to_a.index(start_row)
+    col_check = []
+    ship_object.length.times do |num|
+      if row_index != nil
+        col_check << @cells["#{('A'..'D').to_a[row_index + num]}#{start_col}"]
+      else
+        false
+      end
+    end
+    col_check.compact.count == ship_object.length
+  end
 
   def consecutive_cells?(coords)
     (coords.min..coords.max).to_a == coords
   end
 end
-
