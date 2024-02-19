@@ -35,11 +35,11 @@ RSpec.describe Board do
       expect(@board_1.horizontal_placement_valid?(@cruiser, "D", 1)).to eq true
     end
 
-    # it 'validates placements horizontally'do 
-    #   expect(@board_1.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
-    #   expect(@board_1.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
-    #   expect(@board_1.valid_placement?(@submarine, ["A2", "A3", "A4"])).to eq(false)
-    # end
+    it 'validates placements horizontally'do 
+      expect(@board_1.valid_placement?(@cruiser, ["A1", "A2"])).to eq(false)
+      expect(@board_1.valid_placement?(@cruiser, ["A1", "A2", "A3"])).to eq(true)
+      expect(@board_1.valid_placement?(@submarine, ["A2", "A3", "A4"])).to eq(false)
+    end
 
     it 'validates if placement vertically works'do 
       expect(@board_1.vertical_placement_valid?(@cruiser, 'A', 1)).to be true
@@ -49,17 +49,25 @@ RSpec.describe Board do
       expect(@board_1.vertical_placement_valid?(@cruiser, 'X', 4)).to be false    
     end
 
-    # it 'validates placements vertically'do 
-    #   expect(@board_1.valid_placement?(@cruiser, ["B1", "B2"])).to eq(false)
-    #   expect(@board_1.valid_placement?(@cruiser, ["C1", "C2", "C3"])).to eq(true)
-    #   expect(@board_1.valid_placement?(@submarine, ["D2", "D3", "D4"])).to eq(false)
-    # end
+    it 'validates placements vertically'do 
+      expect(@board_1.valid_placement?(@cruiser, ["B1", "B2"])).to eq(false)
+      expect(@board_1.valid_placement?(@cruiser, ["C1", "C2", "C3"])).to eq(true)
+      expect(@board_1.valid_placement?(@submarine, ["D2", "D3", "D4"])).to eq(false)
+    end
 
-    # it 'validates consecutive placements' do 
-    #   expect(@board_1.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to eq(false)
-    #   expect(@board_1.valid_placement?(@submarine, ["A1", "C1"])).to eq(false)
-    #   expect(@board_1.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq(false)
-    #   expect(@board_1.valid_placement?(@submarine, ["C1", "B1"])).to eq(false)
-    # end
+    it 'validates consecutive placements' do 
+      expect(@board_1.valid_placement?(@cruiser, ["A1", "A2", "A4"])).to eq(false)
+      expect(@board_1.valid_placement?(@submarine, ["A1", "C1"])).to eq(false)
+      expect(@board_1.valid_placement?(@cruiser, ["A3", "A2", "A1"])).to eq(false)
+      expect(@board_1.valid_placement?(@submarine, ["C1", "B1"])).to eq(false)
+    end
+
+    it 'validates that diagonal does not work' do 
+      expect(@board_1.valid_placement?(@cruiser, ["A1", "B2", "C3"])).to eq(false)
+      expect(@board_1.valid_placement?(@cruiser, ["B1", "C1", "D1"])).to eq(true)
+      expect(@board_1.valid_placement?(@submarine, ["B1", "C2"])).to eq(false)
+      expect(@board_1.valid_placement?(@submarine, ["A1", "A2"])).to eq(true)
+      expect(@board_1.valid_placement?(@submarine, ["C2", "D3"])).to eq(false)
+    end 
   end
 end
