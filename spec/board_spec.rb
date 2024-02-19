@@ -41,11 +41,13 @@ RSpec.describe Board do
     #   expect(@board_1.valid_placement?(@submarine, ["A2", "A3", "A4"])).to eq(false)
     # end
 
-    # it 'validates if placement vertically works'do 
-    #   expect(@board_1.vertical_placement_valid?(@cruiser, 0, 1)).to eq(false)
-    #   expect(@board_1.vertical_placement_valid?(@cruiser, 0, 1)).to eq(true)
-    #   expect(@board_1.vertical_placement_valid?(@cruiser, 0, 1)).to eq(false)
-    # end
+    it 'validates if placement vertically works'do 
+      expect(@board_1.vertical_placement_valid?(@cruiser, 'A', 1)).to be true
+      expect(@board_1.vertical_placement_valid?(@cruiser, 'B', 4)).to be true
+      expect(@board_1.vertical_placement_valid?(@cruiser, 'F', 1)).to be false    
+      expect(@board_1.vertical_placement_valid?(@cruiser, 'C', 4)).to be false    
+      expect(@board_1.vertical_placement_valid?(@cruiser, 'X', 4)).to be false    
+    end
 
     # it 'validates placements vertically'do 
     #   expect(@board_1.valid_placement?(@cruiser, ["B1", "B2"])).to eq(false)
