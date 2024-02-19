@@ -23,8 +23,7 @@ class Board
     valid_row && valid_col
   end
 
-  def valid_placement?(ship_object, cell_array)
-    # cell_array.count == ship_object.length unless 
+  def valid_placement?(ship_object, cell_array) 
     return false unless cell_array.all? { |name| valid_coordinate?(name) }
     row_coords = cell_array.map { |name| name[0] }
     col_coords = cell_array.map { |name| name[1..-1].to_i }
@@ -38,16 +37,15 @@ class Board
     end
   end
 
-  def horizontal_placement_valid?(ship_object, start_row, start_col = 2)
+  def horizontal_placement_valid?(ship_object, start_row, start_col)
     
-    row_index = ('A'..'D').to_a.index('C')
-    
-
+    row_index = ('A'..'D').to_a.index(start_row)
+  
     ship_object.length.times do |num|
       row_check << @cells["#{('A'..'D').to_a[row_index]}#{start_col + num}"]  
     end
-      row_check.count == ship_object.length
-    require 'pry'; binding.pry
+    return  row_check.count == ship_object.length
+    
   end
 
   # def vertical_placement_valid?(ship_object, start_row, start_col)
