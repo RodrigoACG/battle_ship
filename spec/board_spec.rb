@@ -30,8 +30,9 @@ RSpec.describe Board do
 
     it 'validates if placement horizontally works'do 
       expect(@board_1.horizontal_placement_valid?(@cruiser, "A", 2)).to be true
-      expect(@board_1.horizontal_placement_valid?(@cruiser, "B", 4)).to be false   
-      expect(@board_1.horizontal_placement_valid?(@cruiser, "B", 2)).to be true
+      expect(@board_1.horizontal_placement_valid?(@cruiser, "B", 4)).to be false
+      expect(@board_1.horizontal_placement_valid?(@cruiser, "C", 2)).to eq true
+      expect(@board_1.horizontal_placement_valid?(@cruiser, "D", 1)).to eq true
     end
 
     # it 'validates placements horizontally'do 
