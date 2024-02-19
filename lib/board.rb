@@ -11,7 +11,6 @@ class Board
             @cells[cell_name] = Cell.new(cell_name)
         end
     end   
-    
   end
 
   def valid_coordinate?(cell_name_check)
@@ -38,7 +37,6 @@ class Board
   end
 
   def horizontal_placement_valid?(ship_object, start_row, start_col)
-    
     row_index = ('A'..'D').to_a.index(start_row)
     row_check = []
     ship_object.length.times do |num|
@@ -47,14 +45,18 @@ class Board
      row_check.compact.count == ship_object.length
   end
 
-  # def vertical_placement_valid?(ship_object, start_row, start_col)
-  #   row_index = ('A'..'D').to_a.index(start_row)
-
-  #   ship_object.length.times do |num|
-  #     return false if @cells["#{('A'..'D').to_a[row_index + num]}#{start_col}"]
-  #     true
-  #   end  
-  # end
+  def vertical_placement_valid?(ship_object, start_row, start_col)
+    row_index = ('A'..'D').to_a.index(start_row)
+    col_check = []
+    ship_object.length.times do |num|
+      if row_index != nil
+        col_check << @cells["#{('A'..'D').to_a[row_index + num]}#{start_col}"]
+      else
+        false
+      end
+    end
+    col_check.compact.count == ship_object.length
+  end
 
   def consecutive_cells?(coords)
     (coords.min..coords.max).to_a == coords
