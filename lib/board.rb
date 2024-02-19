@@ -1,7 +1,7 @@
 require './lib/cell'
 
 class Board
-  attr_reader :cells, :row_check
+  attr_reader :cells
 
   def initialize  
     @cells = {}
@@ -11,7 +11,7 @@ class Board
             @cells[cell_name] = Cell.new(cell_name)
         end
     end   
-    @row_check = []
+    
   end
 
   def valid_coordinate?(cell_name_check)
@@ -40,12 +40,11 @@ class Board
   def horizontal_placement_valid?(ship_object, start_row, start_col)
     
     row_index = ('A'..'D').to_a.index(start_row)
-  
+    row_check = []
     ship_object.length.times do |num|
       row_check << @cells["#{('A'..'D').to_a[row_index]}#{start_col + num}"]  
     end
-    return  row_check.count == ship_object.length
-    
+     row_check.compact.count == ship_object.length
   end
 
   # def vertical_placement_valid?(ship_object, start_row, start_col)
