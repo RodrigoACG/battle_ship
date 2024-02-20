@@ -32,8 +32,9 @@ class Board
     row_coords = row_array.flatten.compact
     
     #check if inputs are sufficient 
-    
     if row_coords.uniq.length != 1 && col_coords.uniq.length != 1 # Check if the ship placement is neither horizontal nor vertical
+      return false
+    elsif cells_empty?(cell_array) == false
       return false
     elsif row_coords.uniq.length == 1 # Horizontal placement
       (consecutive_cells?(col_coords) && horizontal_placement_valid?(ship_object, row_coords[0], col_coords.min)) && col_coords.count == ship_object.length
@@ -42,6 +43,7 @@ class Board
     else
       false
     end
+    # that cell wont be able to be use anymore 
   end
 
   def horizontal_placement_valid?(ship_object, start_row, start_col)
@@ -62,6 +64,7 @@ class Board
   def vertical_placement_valid?(ship_object, start_row, start_col)
     row_index = ('A'..'D').to_a.index(start_row)
     col_check = []
+    
     ship_object.length.times do |num|
       if row_index != nil
         col_check << @cells["#{('A'..'D').to_a[row_index + num]}#{start_col}"]
@@ -75,4 +78,56 @@ class Board
   def consecutive_cells?(coords)
     (coords.min..coords.max).to_a == coords
   end
+
+  def place(ship_object, cell_array)
+    if valid_placement?(ship_object, cell_array) 
+      cell_array.each do |coord|
+        @cells["#{coord}"].place_ship(ship_object)
+      end
+    end
+  end
+  
+  def cells_empty?(coords)
+    coords.all? do |coord|
+      # require 'pry'; binding.pry
+      @cells["#{coord}"].cell_empty?
+    end
+  end
+
+
+  # def valid_placement_2?(ship, coords)
+  #   consecutive_cells?(coords) &&
+  #   coord_length?(ship, coords) &&
+  #   cells_empty?(coords)
+  # end
+  
+  # def place(ship_object, cell_array)
+  #   if valid_placement_2?(ship_object, cell_array) 
+  #     cell_array.each do |coord|
+  #       @cells["#{coord}"].place_ship(ship_object)
+  #     end
+      
+  #   end
+  #   # to place a ship we need to put a peice of a ship on each cell 
+  #   # all the length of the ship should cover a cell. ex cruiser has 3 so 3 cells need to be filled 
+  #   # 
+  # end
+  
+  # def consecutive_cells?(coords)
+  #   (coords.min..coords.max).to_a == coords
+  # end
+  # # def consecutive_cells?(cells)
+  # #   cells.each_cons(2) 
+
+  # # end
+
+  # def coord_length?(ship, coordinates)
+  #   ship.length == coordinates.length
+  # end
+
+
+  # def 
+
+
+  
 end

@@ -5,7 +5,10 @@ RSpec.describe Board do
     @board_1 = Board.new
     @grid = @board_1.cells.keys
     @cruiser = Ship.new("Cruiser", 3)
-    @submarine = Ship.new("Submarine", 2)  
+    @submarine = Ship.new("Submarine", 2) 
+    @cell_1 = @board_1.cells["A1"]
+    @cell_2 = @board_1.cells["A2"]
+    @cell_3 = @board_1.cells["A3"]
 
   end
 
@@ -69,5 +72,38 @@ RSpec.describe Board do
       expect(@board_1.valid_placement?(@submarine, ["A1", "A2"])).to eq(true)
       expect(@board_1.valid_placement?(@submarine, ["C2", "D3"])).to eq(false)
     end 
+  end
+
+  describe '#placing ships' do
+    it 'cells can contain ships' do
+      @board_1.place(@cruiser, ["A1", "A2", "A3"])
+      @cell_1.ship
+      @cell_2.ship
+      @cell_3.ship 
+      # require 'pry'; binding.pry
+      expect(@cell_3.ship).to eq(@cell_2.ship)
+    end
+
+    # it 'checks for overlapping ships' do 
+    #   @board_1.place(@cruiser, ["A1", "A2", "A3"])
+    #   expect(@board_1.valid_placement?(@submarine, ["A1", "B1"])).to eq(false)
+    # end
+  end
+
+  # it 'unit test'do 
+  # expect(@board_1.cells_empty?(["A1", "B2", "C3"])).to eq(true)
+  # @board_1.cells["A1"].place_ship(@cruiser)
+  # expect(@board_1.cells_empty?(["A1", "B2", "C3"])).to eq(false)
+  # @board_1.cells["A2"].place_ship(@cruiser)
+  # expect(@board_1.cells_empty?(["A1", "B2", "C3"])).to eq(false)
+  # end
+
+
+  describe '#overlapping ships' do
+    it 'checks if there is a ship in that cell already' do
+      @board_1.place(@cruiser, ["A1", "A2", "A3"])
+      expect(@board_1.valid_placement?(@submarine, ["A1", "B1"])).to eq(false)
+
+    end
   end
 end
