@@ -7,7 +7,7 @@ class Cell
         @fired_upon = false
     end
 
-    def empty?
+    def cell_empty?
         @ship == nil
     end
 
