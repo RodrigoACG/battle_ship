@@ -19,28 +19,20 @@ class Cell
         @fired_upon 
     end
 
-    def fire_upon(coord)
-         if @fired_upon = true 
-            @ship.hit unless @ship == nil
-            coord.render
-            
-         end
-        
-
-        
-        
+    def fire_upon
+        @fired_upon = true 
+        @ship.hit unless @ship == nil
     end
 
     def render(ship_cond = nil) 
         # require 'pry'; binding.pry
-        
         if ship_cond == true 
             
             if  @fired_upon == false && @ship != nil
                 return " S"
-            elsif @fired_upon == true && @ship.health == 0 && @ship.sunk? == true
+            elsif @fired_upon == true && @ship.sunk? == true
                 return " X"
-            elsif @fired_upon == true && @ship.health > 0
+            elsif @fired_upon == true && @ship.sunk? == false
                 return " H"
             end      
         end

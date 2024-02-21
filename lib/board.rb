@@ -95,25 +95,23 @@ class Board
   end
 
 
-  def render(ship = nil )
+  def render(ship = nil)
     row_0 = "  1 2 3 4 \n" 
     display_cells = @cells.map do |coordinate, cell|
       cell.render(ship)
-      # require 'pry'; binding.pry
     end
+
+    row_1 = "A" + display_cells[0..3].join + " \n"
+    row_2 = "B" + display_cells[4..7].join + " \n"
+    row_3 = "C" + display_cells[8..11].join + " \n"
+    row_4 = "D" + display_cells[12..15].join + " \n"
     
-    # require 'pry'; binding.pry
-      row_1 = "A" + display_cells[0..3].join + " \n"
-      row_2 = "B" + display_cells[4..7].join + " \n"
-      row_3 = "C" + display_cells[8..11].join + " \n"
-      row_4 = "D" + display_cells[12..15].join + " \n"
-     
-      row_0 + row_1 + row_2 + row_3 + row_4
-      
-    #the reason we did this is because well row 0 is just listing the numbers and then we add
+    row_0 + row_1 + row_2 + row_3 + row_4  
+    
+  end
+
+#the reason we did this is because well row 0 is just listing the numbers and then we add
     #we add row 1 ,2, 3, and 4 to it do it can format our grid. 
-
-
     # first the board prints the columes then each row on a line 
     # example "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
     # then we want when ship is equal to true we print 
@@ -121,9 +119,6 @@ class Board
     # each cell is going to have the render method called upon it from the cell class 
     # @cells["A1"].render + @cells["A1"].render
     # @cells["A1".."A4"].render
-  end
-
-
 
 
   # def valid_placement_2?(ship, coords)
