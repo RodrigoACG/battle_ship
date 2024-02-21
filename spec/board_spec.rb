@@ -103,7 +103,24 @@ RSpec.describe Board do
     it 'checks if there is a ship in that cell already' do
       @board_1.place(@cruiser, ["A1", "A2", "A3"])
       expect(@board_1.valid_placement?(@submarine, ["A1", "B1"])).to eq(false)
+      expect(@board_1.valid_placement?(@submarine, ["C1", "D1"])).to eq(true)
+    end
+  end
 
+  describe '#render ships to board' do
+    it 'renders ' do 
+      @board_1.place(@cruiser, ["A1", "A2", "A3"])
+      expect(@board_1.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+      # require 'pry'; binding.pry
+      expect(@board_1.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
+      
+    end
+
+    it 'fires upon cell'do 
+      @board_1.place(@cruiser, ["A1", "A2", "A3"])
+      @cell_1.fire_upon
+      
+      expect(@board_1.render).to eq("  1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n" )
     end
   end
 end
