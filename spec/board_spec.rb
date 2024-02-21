@@ -9,7 +9,7 @@ RSpec.describe Board do
     @cell_1 = @board_1.cells["A1"]
     @cell_2 = @board_1.cells["A2"]
     @cell_3 = @board_1.cells["A3"]
-
+    @cell_4 = @board_1.cells["B1"]
   end
 
   describe '#initialize' do
@@ -80,24 +80,9 @@ RSpec.describe Board do
       @cell_1.ship
       @cell_2.ship
       @cell_3.ship 
-      # require 'pry'; binding.pry
       expect(@cell_3.ship).to eq(@cell_2.ship)
     end
-
-    # it 'checks for overlapping ships' do 
-    #   @board_1.place(@cruiser, ["A1", "A2", "A3"])
-    #   expect(@board_1.valid_placement?(@submarine, ["A1", "B1"])).to eq(false)
-    # end
   end
-
-  # it 'unit test'do 
-  # expect(@board_1.cells_empty?(["A1", "B2", "C3"])).to eq(true)
-  # @board_1.cells["A1"].place_ship(@cruiser)
-  # expect(@board_1.cells_empty?(["A1", "B2", "C3"])).to eq(false)
-  # @board_1.cells["A2"].place_ship(@cruiser)
-  # expect(@board_1.cells_empty?(["A1", "B2", "C3"])).to eq(false)
-  # end
-
 
   describe '#overlapping ships' do
     it 'checks if there is a ship in that cell already' do
@@ -107,20 +92,45 @@ RSpec.describe Board do
     end
   end
 
-  describe '#render ships to board' do
-    it 'renders ' do 
+  describe '#render' do
+    it 'renders ships on player board' do 
       @board_1.place(@cruiser, ["A1", "A2", "A3"])
-      expect(@board_1.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
-      # require 'pry'; binding.pry
-      expect(@board_1.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
       
+      expect(@board_1.render(true)).to eq("  1 2 3 4 \nA S S S . \nB . . . . \nC . . . . \nD . . . . \n")
     end
 
-    it 'fires upon cell'do 
+    it 'renders ships on computer board' do 
+      @board_1.place(@cruiser, ["A1", "A2", "A3"])
+
+      expect(@board_1.render).to eq("  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n")
+    end
+
+    it 'fires upon cell containing ships on player board' do 
+      @board_1.place(@cruiser, ["A1", "A2", "A3"])
+      @cell_1.fire_upon
+      
+      expect(@board_1.render(true)).to eq("  1 2 3 4 \nA H S S . \nB . . . . \nC . . . . \nD . . . . \n" )
+    end
+
+    it 'fires upon cell containing ships on computer board' do 
       @board_1.place(@cruiser, ["A1", "A2", "A3"])
       @cell_1.fire_upon
       
       expect(@board_1.render).to eq("  1 2 3 4 \nA H . . . \nB . . . . \nC . . . . \nD . . . . \n" )
+    end
+
+    it 'fires upon cell and shows miss on player board' do 
+      @board_1.place(@cruiser, ["A1", "A2", "A3"])
+      @cell_4.fire_upon
+      
+      expect(@board_1.render(true)).to eq("  1 2 3 4 \nA S S S . \nB M . . . \nC . . . . \nD . . . . \n" )
+    end
+
+    it 'fires upon cell and shows miss on computer board' do 
+      @board_1.place(@cruiser, ["A1", "A2", "A3"])
+      @cell_4.fire_upon
+      
+      expect(@board_1.render).to eq("  1 2 3 4 \nA . . . . \nB M . . . \nC . . . . \nD . . . . \n" )
     end
   end
 end
