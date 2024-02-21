@@ -100,7 +100,7 @@ class Board
     display_cells = @cells.map do |coordinate, cell|
       cell.render(ship)
     end
-
+      
     row_1 = "A" + display_cells[0..3].join + " \n"
     row_2 = "B" + display_cells[4..7].join + " \n"
     row_3 = "C" + display_cells[8..11].join + " \n"
