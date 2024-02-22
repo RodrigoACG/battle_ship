@@ -89,7 +89,6 @@ class Board
   
   def cells_empty?(coords)
     coords.all? do |coord|
-      # require 'pry'; binding.pry
       @cells["#{coord}"].cell_empty?
     end
   end
@@ -110,50 +109,12 @@ class Board
     
   end
 
-#the reason we did this is because well row 0 is just listing the numbers and then we add
-    #we add row 1 ,2, 3, and 4 to it do it can format our grid. 
-    # first the board prints the columes then each row on a line 
-    # example "  1 2 3 4 \nA . . . . \nB . . . . \nC . . . . \nD . . . . \n"
-    # then we want when ship is equal to true we print 
-    # example "  1 2 3 4 \n + A S S S . \n + B . . . . \n + C . . . . \n + D . . . . \n" 
-    # each cell is going to have the render method called upon it from the cell class 
-    # @cells["A1"].render + @cells["A1"].render
-    # @cells["A1".."A4"].render
+  def fire_at(cell_coord)
+    return false unless valid_coordinate?(cell_coord)
+    cell = @cells[cell_coord]
 
-
-  # def valid_placement_2?(ship, coords)
-  #   consecutive_cells?(coords) &&
-  #   coord_length?(ship, coords) &&
-  #   cells_empty?(coords)
-  # end
-  
-  # def place(ship_object, cell_array)
-  #   if valid_placement_2?(ship_object, cell_array) 
-  #     cell_array.each do |coord|
-  #       @cells["#{coord}"].place_ship(ship_object)
-  #     end
-      
-  #   end
-  #   # to place a ship we need to put a peice of a ship on each cell 
-  #   # all the length of the ship should cover a cell. ex cruiser has 3 so 3 cells need to be filled 
-  #   # 
-  # end
-  
-  # def consecutive_cells?(coords)
-  #   (coords.min..coords.max).to_a == coords
-  # end
-  # # def consecutive_cells?(cells)
-  # #   cells.each_cons(2) 
-
-  # # end
-
-  # def coord_length?(ship, coordinates)
-  #   ship.length == coordinates.length
-  # end
-
-
-  # def 
-
-
+    return false unless cell.fired_upon? == false
+    cell.fire_upon
+  end
   
 end
