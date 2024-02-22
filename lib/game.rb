@@ -17,7 +17,7 @@ class Game
         p "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~"
         input = gets.chomp.downcase
         if input == "p"
-            @setup
+            setup
         elsif input == "q"
             exit
         else
@@ -30,12 +30,12 @@ class Game
         submarine_input = []
         @computer_board.place(@computer_cruiser, ["C1", "C2", "C3"])
         @computer_board.place(@comptuer_submarine, ["D3", "D4"])
-        p   "I have laid out my ships on the grid." + "\n" +
+        puts   "I have laid out my ships on the grid." + "\n" +
             "You now need to lay out your two ships." + "\n"+
             "The Cruiser is three units long and the Submarine is two units long." + "\n"
-        p @player_board.render
-        p "Enter the squares for the Cruiser (3 spaces):"
-        loop do
+        puts @player_board.render
+        puts "Enter the squares for the Cruiser (3 spaces):"
+        loop do cruiser_input
             cruiser_input << gets.chomp.to_s.upcase
         
             if @player_board.valid_placement?(@player_cruiser, cruiser_input) == true
@@ -45,8 +45,8 @@ class Game
                 "Incorrect input try again!"
             end
         end
-        p @player_board.render(true)
-        p "Enter the squares for the Submarine (2 spaces):"
+        puts @player_board.render(true)
+        puts "Enter the squares for the Submarine (2 spaces):"
         loop do
             submarine_input << gets.chomp.to_s.upcase
             if @player_board.valid_placement?(@player_submarine, submarine_input) == true
@@ -56,171 +56,175 @@ class Game
                 "Incorrect input try again!"
             end
         end
+        puts @player_board.render(true)
+        puts "Prepare for battle!!!"
+        turn
     end
 
     def turn
-        loop do while shot != q || 
+        loop do shot != q || 
             (@player_cruiser.sunk? && @player_submarine.sunk?) || 
             (@computer_cruiser.sunk? && @comptuer_submarine.sunk?)
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+ "\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("A1")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("A2")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("A3")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("A4")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("B1")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("B2")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("B3")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("B4")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("C1")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("C2")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("C3")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("C4")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("D1")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("D2")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("D3")
-        p "=============COMPUTER BOARD============="+"\n"
-        @computer_board.render
-        p "\n"
-        p "==============PLAYER BOARD=============="+ "\n"
-        @player_board.render(true)
-        p "\n"
-        p "Enter the coordinate for your shot:"
+        puts "=============COMPUTER BOARD============="+"\n"
+        puts @computer_board.render
+        puts "\n"
+        puts "==============PLAYER BOARD=============="+ "\n"
+        puts @player_board.render(true)
+        puts "\n"
+        puts "Enter the coordinate for your shot:"
         shot = gets.chomp.to_s.upcase
         @computer_board.fire_at(shot)
         @player_board.fire_at("D4")
+        end
     end
 end

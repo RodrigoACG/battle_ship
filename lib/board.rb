@@ -89,6 +89,7 @@ class Board
   
   def cells_empty?(coords)
     coords.all? do |coord|
+      require 'pry'; binding.pry
       @cells["#{coord}"].cell_empty?
     end
   end

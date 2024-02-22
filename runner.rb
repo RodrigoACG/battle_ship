@@ -1,4 +1,3 @@
-require 'spec_helper'
+require './spec/spec_helper'
 
-Game.start
-Game.turn
+Game.new.start
